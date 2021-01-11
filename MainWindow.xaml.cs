@@ -36,9 +36,10 @@ namespace OOPExam
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e) // When Window is loaded execute code
         {
-            Random rnd = new Random();
+            // Create Sample Objects
+            Random rnd = new Random(); // Random Number generator
             CurrentAccount ca1 = new CurrentAccount() { FirstName = "John", LastName = "Smith", Balance = 1500, AccountNumber = rnd.Next(1, 500000) };
             CurrentAccount ca2 = new CurrentAccount() { FirstName = "Barbara", LastName = "Wilson", Balance = 8300, AccountNumber = rnd.Next(1, 500000) };
             SavingsAccount sa1 = new SavingsAccount() { FirstName = "Linda", LastName = "Murphy", Balance = 5500, AccountNumber = rnd.Next(1, 500000) };
@@ -49,19 +50,21 @@ namespace OOPExam
             Accounts.Add(sa1);
             Accounts.Add(sa2);
 
-            SortListBox();
+            SortListBox(); // Sort Method and prints out listbox
         }
 
-        private void lstAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lstAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e) // Checks for any selection in the list box
         {
             Account selectedAccount = lstAccounts.SelectedItem as Account;
 
+            //Make sure the selected account is not null to avoid errors
             if (selectedAccount != null)
             {
                 tbxFirstName.Text = selectedAccount.FirstName;
                 tbxLastName.Text = selectedAccount.LastName;
                 tbxBalance.Text = selectedAccount.Balance.ToString();
 
+                //Check if selected is a current account or a savings account
                 if (selectedAccount is CurrentAccount)
                 {
                     CurrentAccount selectedCurrent = selectedAccount as CurrentAccount;
@@ -76,8 +79,9 @@ namespace OOPExam
                 tbxInterest.Text = null;
             }
         }
-        private void SortListBox()
+        private void SortListBox() // Sort Method
         {
+            // Prints out list box to the window
             if (chkCurrentAccount.IsChecked == true || chkSavingsAccount.IsChecked == true)
             { 
                 lstAccounts.ItemsSource = null;
@@ -93,8 +97,9 @@ namespace OOPExam
             
         }
 
-        private void Filter()
+        private void Filter() //Filter Method
         {
+            // Filters the Listbox using the checkbox
             filteredAccounts.Clear();
             lstAccounts.ItemsSource = null;
 
@@ -131,13 +136,14 @@ namespace OOPExam
 
         }
 
-        private void chkCurrentAccount_Click(object sender, RoutedEventArgs e)
+        private void chkCurrentAccount_Click(object sender, RoutedEventArgs e) 
         {
+            // When a checkbox is clicked filter list and sort it
             Filter();
             SortListBox();
         }
 
-        private void btnDeposit_Click(object sender, RoutedEventArgs e)
+        private void btnDeposit_Click(object sender, RoutedEventArgs e) // Deposit Method
         {
             Account selectedAccount = lstAccounts.SelectedItem as Account;
             if (selectedAccount != null)
@@ -159,7 +165,7 @@ namespace OOPExam
                 tbxBalance.Text = selectedAccount.Balance.ToString();
             }
             tbxTransactionAmount.Text = "";
-        }
+        } // Withdraw Method
 
         private void btnInterest_Click(object sender, RoutedEventArgs e)
         {
@@ -172,6 +178,6 @@ namespace OOPExam
                 double result = interest + selectedAccount.Balance;
                 tbxBalance.Text = result.ToString();
             }
-        }
+        } // Interest Method
     }
 }

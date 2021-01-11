@@ -10,15 +10,17 @@ namespace OOPExam
 {
     public abstract class Account
     {
+        // Set up Properties
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public double Balance { get; set; }
         public string InterestDate { get; set; }
-
         public int AccountNumber { get; set; }
-
+        
+        //Abstract Method
         public abstract double CalculateInterest();
 
+        //ToString Method
         public override string ToString()
         {
             return $"{AccountNumber} - {LastName}, {FirstName}";
@@ -26,7 +28,7 @@ namespace OOPExam
 
     }
 
-    public class CurrentAccount : Account
+    public class CurrentAccount : Account // Inherits from Account Class
     {
         const double InterestRate = 0.03;
         public override double CalculateInterest()
@@ -36,7 +38,7 @@ namespace OOPExam
         }
     }
 
-    public class SavingsAccount : Account
+    public class SavingsAccount : Account // Inherits from Account Class
     {
         const double InterestRate = 0.06;
         public override double CalculateInterest()
