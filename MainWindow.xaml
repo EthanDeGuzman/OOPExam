@@ -9,8 +9,8 @@
     <Grid>
         <Label x:Name="label" Content="Account Lists" HorizontalAlignment="Left" Height="29" Margin="20,54,0,0" VerticalAlignment="Top" Width="160" FontSize="14"/>
         <ListBox x:Name="lstAccounts" HorizontalAlignment="Left" Height="294" Margin="20,88,0,0" VerticalAlignment="Top" Width="246" SelectionChanged="lstAccounts_SelectionChanged"/>
-        <CheckBox x:Name="chkCurrentAccount" Content="Current Accounts" HorizontalAlignment="Left" Height="26" Margin="20,28,0,0" VerticalAlignment="Top" Width="115"/>
-        <CheckBox x:Name="chkSavingsAccount" Content="Savings Accounts" HorizontalAlignment="Left" Height="26" Margin="150,28,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="0.682,0.643"/>
+        <CheckBox x:Name="chkCurrentAccount" Content="Current Accounts" HorizontalAlignment="Left" Height="26" Margin="20,28,0,0" VerticalAlignment="Top" Width="115" Click="chkCurrentAccount_Click"/>
+        <CheckBox x:Name="chkSavingsAccount" Content="Savings Accounts" HorizontalAlignment="Left" Height="26" Margin="150,28,0,0" VerticalAlignment="Top" Width="116" RenderTransformOrigin="0.682,0.643" Click="chkCurrentAccount_Click"/>
         <Label x:Name="label1" Content="Account Details" HorizontalAlignment="Left" Height="26" Margin="319,36,0,0" VerticalAlignment="Top" Width="124" FontSize="14"/>
         <Label x:Name="label2" Content="First Name: " HorizontalAlignment="Left" Height="28" Margin="319,70,0,0" VerticalAlignment="Top" Width="87"/>
         <Label x:Name="label3" Content="Last Name:" HorizontalAlignment="Left" Height="27" Margin="319,103,0,0" VerticalAlignment="Top" Width="76"/>

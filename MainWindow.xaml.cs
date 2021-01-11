@@ -77,18 +77,62 @@ namespace OOPExam
         private void SortListBox()
         {
             if (chkCurrentAccount.IsChecked == true || chkSavingsAccount.IsChecked == true)
-            {
-                filteredAccounts = new ObservableCollection<Account>(filteredAccounts.OrderBy(x => x.AccountNumber));
+            { 
                 lstAccounts.ItemsSource = null;
+                filteredAccounts = new ObservableCollection<Account>(filteredAccounts.OrderBy(x => x.AccountNumber));
                 lstAccounts.ItemsSource = filteredAccounts;
             }
             else
             {
-                Accounts = new ObservableCollection<Account>(Accounts.OrderBy(x => x.AccountNumber));
                 lstAccounts.ItemsSource = null;
+                Accounts = new ObservableCollection<Account>(Accounts.OrderBy(x => x.AccountNumber));
                 lstAccounts.ItemsSource = Accounts;
             }
             
+        }
+
+        private void Filter()
+        {
+            filteredAccounts.Clear();
+            lstAccounts.ItemsSource = null;
+
+            if (chkCurrentAccount.IsChecked == true && chkSavingsAccount.IsChecked == true)
+            {
+                foreach (Account accounts in Accounts)
+                {
+                    filteredAccounts.Add(accounts);
+                }
+                lstAccounts.ItemsSource = filteredAccounts;
+            }
+            else if (chkCurrentAccount.IsChecked == true)
+            {
+                foreach (Account currentAccount in Accounts)
+                {
+                    if (currentAccount is CurrentAccount)
+                    {
+                        filteredAccounts.Add(currentAccount);
+                    }
+                }
+                lstAccounts.ItemsSource = filteredAccounts;
+            }
+            else
+            {
+                foreach (Account savingsAccount in Accounts)
+                {
+                    if (savingsAccount is SavingsAccount)
+                    {
+                        filteredAccounts.Add(savingsAccount);
+                    }
+                }
+                lstAccounts.ItemsSource = filteredAccounts;
+            }
+
+        }
+
+        private void chkCurrentAccount_Click(object sender, RoutedEventArgs e)
+        {
+            Filter();
+            SortListBox();
         }
     }
 }
