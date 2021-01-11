@@ -18,6 +18,14 @@ namespace OOPExam
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    /*
+     ========================================================
+     GITHUB LINK: https://github.com/EthanDeguzman/OOPExam
+     ========================================================
+     */
+
     public partial class MainWindow : Window
     {
         public MainWindow()
