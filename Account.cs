@@ -15,11 +15,13 @@ namespace OOPExam
         public double Balance { get; set; }
         public string InterestDate { get; set; }
 
+        public int AccountNumber { get; set; }
+
         public abstract double CalculateInterest();
 
         public override string ToString()
         {
-            return $"{LastName.ToUpper()}, {FirstName}";
+            return $"{AccountNumber} - {LastName}, {FirstName}";
         }
 
     }

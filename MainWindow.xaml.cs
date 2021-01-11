@@ -38,7 +38,41 @@ namespace OOPExam
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            Random rnd = new Random();
+            CurrentAccount ca1 = new CurrentAccount() { FirstName = "John", LastName = "Smith", Balance = 1500, AccountNumber = rnd.Next(1,500000)};
+            SavingsAccount sa1 = new SavingsAccount() { FirstName = "Linda", LastName = "Murphy", Balance = 5500, AccountNumber = rnd.Next(1, 500000) };
+
+            Accounts.Add(ca1);
+            Accounts.Add(sa1);
+
+            lstAccounts.ItemsSource = Accounts;
+        }
+
+        private void lstAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Account selectedAccount = lstAccounts.SelectedItem as Account;
+
+            if (selectedAccount != null)
+            {
+                tbxFirstName.Text = selectedAccount.FirstName;
+                tbxLastName.Text = selectedAccount.LastName;
+                tbxBalance.Text = selectedAccount.Balance.ToString();
+
+                if (selectedAccount is CurrentAccount)
+                {
+                    CurrentAccount selectedCurrent = selectedAccount as CurrentAccount;
+                    tbxAccountType.Text = "Current Account";
+                    tbxInterest.Text = selectedCurrent.CalculateInterest().ToString();
+                    tbxInterestDate.Text = selectedCurrent.InterestDate;
+                }
+                else if (selectedAccount is SavingsAccount)
+                {
+                    SavingsAccount selectedSavings = selectedAccount as SavingsAccount;
+                    tbxAccountType.Text = "Savings Account";
+                    tbxInterest.Text = selectedSavings.CalculateInterest().ToString();
+                    tbxInterestDate.Text = selectedSavings.InterestDate;
+                }
+            }
         }
     }
 }
