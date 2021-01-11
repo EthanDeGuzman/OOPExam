@@ -39,13 +39,13 @@ namespace OOPExam
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
-            CurrentAccount ca1 = new CurrentAccount() { FirstName = "John", LastName = "Smith", Balance = 1500, AccountNumber = rnd.Next(1,500000)};
+            CurrentAccount ca1 = new CurrentAccount() { FirstName = "John", LastName = "Smith", Balance = 1500, AccountNumber = rnd.Next(1, 500000) };
             SavingsAccount sa1 = new SavingsAccount() { FirstName = "Linda", LastName = "Murphy", Balance = 5500, AccountNumber = rnd.Next(1, 500000) };
 
             Accounts.Add(ca1);
             Accounts.Add(sa1);
 
-            lstAccounts.ItemsSource = Accounts;
+            SortListBox();
         }
 
         private void lstAccounts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +73,22 @@ namespace OOPExam
                     tbxInterestDate.Text = selectedSavings.InterestDate;
                 }
             }
+        }
+        private void SortListBox()
+        {
+            if (chkCurrentAccount.IsChecked == true || chkSavingsAccount.IsChecked == true)
+            {
+                filteredAccounts = new ObservableCollection<Account>(filteredAccounts.OrderBy(x => x.AccountNumber));
+                lstAccounts.ItemsSource = null;
+                lstAccounts.ItemsSource = filteredAccounts;
+            }
+            else
+            {
+                Accounts = new ObservableCollection<Account>(Accounts.OrderBy(x => x.AccountNumber));
+                lstAccounts.ItemsSource = null;
+                lstAccounts.ItemsSource = Accounts;
+            }
+            
         }
     }
 }
