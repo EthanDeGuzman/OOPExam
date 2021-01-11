@@ -40,10 +40,14 @@ namespace OOPExam
         {
             Random rnd = new Random();
             CurrentAccount ca1 = new CurrentAccount() { FirstName = "John", LastName = "Smith", Balance = 1500, AccountNumber = rnd.Next(1, 500000) };
+            CurrentAccount ca2 = new CurrentAccount() { FirstName = "Barbara", LastName = "Wilson", Balance = 8300, AccountNumber = rnd.Next(1, 500000) };
             SavingsAccount sa1 = new SavingsAccount() { FirstName = "Linda", LastName = "Murphy", Balance = 5500, AccountNumber = rnd.Next(1, 500000) };
+            SavingsAccount sa2 = new SavingsAccount() { FirstName = "Jake", LastName = "Walter", Balance = 4800, AccountNumber = rnd.Next(1, 500000) };
 
             Accounts.Add(ca1);
+            Accounts.Add(ca2);
             Accounts.Add(sa1);
+            Accounts.Add(sa2);
 
             SortListBox();
         }
@@ -62,16 +66,14 @@ namespace OOPExam
                 {
                     CurrentAccount selectedCurrent = selectedAccount as CurrentAccount;
                     tbxAccountType.Text = "Current Account";
-                    tbxInterest.Text = selectedCurrent.CalculateInterest().ToString();
-                    tbxInterestDate.Text = selectedCurrent.InterestDate;
                 }
                 else if (selectedAccount is SavingsAccount)
                 {
                     SavingsAccount selectedSavings = selectedAccount as SavingsAccount;
                     tbxAccountType.Text = "Savings Account";
-                    tbxInterest.Text = selectedSavings.CalculateInterest().ToString();
-                    tbxInterestDate.Text = selectedSavings.InterestDate;
                 }
+
+                tbxInterest.Text = null;
             }
         }
         private void SortListBox()
@@ -133,6 +135,43 @@ namespace OOPExam
         {
             Filter();
             SortListBox();
+        }
+
+        private void btnDeposit_Click(object sender, RoutedEventArgs e)
+        {
+            Account selectedAccount = lstAccounts.SelectedItem as Account;
+            if (selectedAccount != null)
+            {
+                double amount = double.Parse(tbxTransactionAmount.Text);
+                selectedAccount.Balance += amount;
+                tbxBalance.Text = selectedAccount.Balance.ToString();
+            }
+            tbxTransactionAmount.Text = "";
+        }
+
+        private void btnWithdraw_Click(object sender, RoutedEventArgs e)
+        {
+            Account selectedAccount = lstAccounts.SelectedItem as Account;
+            if (selectedAccount != null)
+            {
+                double amount = double.Parse(tbxTransactionAmount.Text);
+                selectedAccount.Balance -= amount;
+                tbxBalance.Text = selectedAccount.Balance.ToString();
+            }
+            tbxTransactionAmount.Text = "";
+        }
+
+        private void btnInterest_Click(object sender, RoutedEventArgs e)
+        {
+            Account selectedAccount = lstAccounts.SelectedItem as Account;
+            if (selectedAccount != null)
+            {
+                double interest = selectedAccount.CalculateInterest();
+                tbxInterest.Text = interest.ToString();
+                tbxInterestDate.Text = selectedAccount.InterestDate;
+                double result = interest + selectedAccount.Balance;
+                tbxBalance.Text = result.ToString();
+            }
         }
     }
 }
